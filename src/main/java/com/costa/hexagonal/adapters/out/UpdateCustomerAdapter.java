@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpadateCustomerAdapter implements UpdateCustomerOutPutPort {
+public class UpdateCustomerAdapter implements UpdateCustomerOutPutPort {
 
     @Autowired
     private CustomerRepository customerRepository;
