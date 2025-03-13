@@ -4,6 +4,7 @@ import com.costa.hexagonal.application.core.domain.Customer;
 import com.costa.hexagonal.application.ports.in.InsertCustomerInputPort;
 import com.costa.hexagonal.application.ports.out.FindAddressByZipCodeOutPutPort;
 import com.costa.hexagonal.application.ports.out.InsertCustomerOutPutPort;
+import com.costa.hexagonal.application.ports.out.SendCpfForValidationOutPut;
 
 public class InsertCustomerUseCase implements InsertCustomerInputPort {
 
@@ -11,11 +12,14 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
 
     private final InsertCustomerOutPutPort insertCustomerOutPutPort;
 
+    private final SendCpfForValidationOutPut sendCpfForValidationOutPut;
+
     public InsertCustomerUseCase(
             FindAddressByZipCodeOutPutPort findAddressByZipCodeOutPutPort,
-            InsertCustomerOutPutPort insertCustomerOutPutPort) {
+            InsertCustomerOutPutPort insertCustomerOutPutPort, SendCpfForValidationOutPut sendCpfForValidationOutPut) {
         this.findAddressByZipCodeOutPutPort = findAddressByZipCodeOutPutPort;
         this.insertCustomerOutPutPort = insertCustomerOutPutPort;
+        this.sendCpfForValidationOutPut = sendCpfForValidationOutPut;
     }
 
     @Override
@@ -23,6 +27,7 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
         var address = findAddressByZipCodeOutPutPort.find(zipCode);
         customer.setAddress(address);
         insertCustomerOutPutPort.insert(customer);
+        sendCpfForValidationOutPut.send(customer.getCpf());
     }
 
 }
