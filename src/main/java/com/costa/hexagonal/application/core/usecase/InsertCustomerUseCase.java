@@ -2,32 +2,34 @@ package com.costa.hexagonal.application.core.usecase;
 
 import com.costa.hexagonal.application.core.domain.Customer;
 import com.costa.hexagonal.application.ports.in.InsertCustomerInputPort;
-import com.costa.hexagonal.application.ports.out.FindAddressByZipCodeOutPutPort;
-import com.costa.hexagonal.application.ports.out.InsertCustomerOutPutPort;
-import com.costa.hexagonal.application.ports.out.SendCpfForValidationOutPut;
+import com.costa.hexagonal.application.ports.out.FindAddressByZipCodeOutputPort;
+import com.costa.hexagonal.application.ports.out.InsertCustomerOutputPort;
+import com.costa.hexagonal.application.ports.out.SendCpfForValidationOutputPort;
 
 public class InsertCustomerUseCase implements InsertCustomerInputPort {
 
-    private final FindAddressByZipCodeOutPutPort findAddressByZipCodeOutPutPort;
+    private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
 
-    private final InsertCustomerOutPutPort insertCustomerOutPutPort;
+    private final InsertCustomerOutputPort insertCustomerOutputPort;
 
-    private final SendCpfForValidationOutPut sendCpfForValidationOutPut;
+    private final SendCpfForValidationOutputPort sendCpfForValidationOutputPort;
 
     public InsertCustomerUseCase(
-            FindAddressByZipCodeOutPutPort findAddressByZipCodeOutPutPort,
-            InsertCustomerOutPutPort insertCustomerOutPutPort, SendCpfForValidationOutPut sendCpfForValidationOutPut) {
-        this.findAddressByZipCodeOutPutPort = findAddressByZipCodeOutPutPort;
-        this.insertCustomerOutPutPort = insertCustomerOutPutPort;
-        this.sendCpfForValidationOutPut = sendCpfForValidationOutPut;
+            FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort,
+            InsertCustomerOutputPort insertCustomerOutputPort,
+            SendCpfForValidationOutputPort sendCpfForValidationOutputPort
+    ) {
+        this.findAddressByZipCodeOutputPort = findAddressByZipCodeOutputPort;
+        this.insertCustomerOutputPort = insertCustomerOutputPort;
+        this.sendCpfForValidationOutputPort = sendCpfForValidationOutputPort;
     }
 
     @Override
     public void insert(Customer customer, String zipCode) {
-        var address = findAddressByZipCodeOutPutPort.find(zipCode);
+        var address = findAddressByZipCodeOutputPort.find(zipCode);
         customer.setAddress(address);
-        insertCustomerOutPutPort.insert(customer);
-        sendCpfForValidationOutPut.send(customer.getCpf());
+        insertCustomerOutputPort.insert(customer);
+        sendCpfForValidationOutputPort.send(customer.getCpf());
     }
 
 }

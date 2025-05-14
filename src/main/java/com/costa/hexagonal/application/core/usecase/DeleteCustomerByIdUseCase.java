@@ -2,24 +2,26 @@ package com.costa.hexagonal.application.core.usecase;
 
 import com.costa.hexagonal.application.ports.in.DeleteCustomerByIdInputPort;
 import com.costa.hexagonal.application.ports.in.FindCustomerByIdInputPort;
-import com.costa.hexagonal.application.ports.out.DeleteCustomerByIdOutPutPort;
+import com.costa.hexagonal.application.ports.out.DeleteCustomerByIdOutputPort;
 
 public class DeleteCustomerByIdUseCase implements DeleteCustomerByIdInputPort {
 
     private final FindCustomerByIdInputPort findCustomerByIdInputPort;
-    private final DeleteCustomerByIdOutPutPort deleteCustomerByIdOutPutPort;
+
+    private final DeleteCustomerByIdOutputPort deleteCustomerByIdOutputPort;
 
     public DeleteCustomerByIdUseCase(
             FindCustomerByIdInputPort findCustomerByIdInputPort,
-            DeleteCustomerByIdOutPutPort deleteCustomerByIdOutPutPort) {
+            DeleteCustomerByIdOutputPort deleteCustomerByIdOutputPort
+    ) {
         this.findCustomerByIdInputPort = findCustomerByIdInputPort;
-        this.deleteCustomerByIdOutPutPort = deleteCustomerByIdOutPutPort;
+        this.deleteCustomerByIdOutputPort = deleteCustomerByIdOutputPort;
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(final String id) {
         findCustomerByIdInputPort.find(id);
-        deleteCustomerByIdOutPutPort.delete(id);
+        deleteCustomerByIdOutputPort.delete(id);
     }
 
 }

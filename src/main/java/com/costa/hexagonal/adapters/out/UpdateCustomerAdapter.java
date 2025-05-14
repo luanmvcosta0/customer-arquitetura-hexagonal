@@ -3,12 +3,12 @@ package com.costa.hexagonal.adapters.out;
 import com.costa.hexagonal.adapters.out.repository.CustomerRepository;
 import com.costa.hexagonal.adapters.out.repository.mapper.CustomerEntityMapper;
 import com.costa.hexagonal.application.core.domain.Customer;
-import com.costa.hexagonal.application.ports.out.UpdateCustomerOutPutPort;
+import com.costa.hexagonal.application.ports.out.UpdateCustomerOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpdateCustomerAdapter implements UpdateCustomerOutPutPort {
+public class UpdateCustomerAdapter implements UpdateCustomerOutputPort {
 
     @Autowired
     private CustomerRepository customerRepository;

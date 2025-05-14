@@ -2,8 +2,10 @@ package com.costa.hexagonal.application.ports.out;
 
 import com.costa.hexagonal.application.core.domain.Customer;
 
-public interface InsertCustomerOutPutPort {
+import java.util.Optional;
 
-    void insert(Customer customer);
+public interface FindCustomerByIdOutputPort {
+
+    Optional<Customer> find(String id);
 
 }

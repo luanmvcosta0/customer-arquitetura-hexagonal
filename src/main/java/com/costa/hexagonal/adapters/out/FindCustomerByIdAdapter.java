@@ -3,13 +3,14 @@ package com.costa.hexagonal.adapters.out;
 import com.costa.hexagonal.adapters.out.repository.CustomerRepository;
 import com.costa.hexagonal.adapters.out.repository.mapper.CustomerEntityMapper;
 import com.costa.hexagonal.application.core.domain.Customer;
-import com.costa.hexagonal.application.ports.out.FindCustomerByIdOutPutPort;
+import com.costa.hexagonal.application.ports.out.FindCustomerByIdOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.Optional;
 
 @Component
-public class FindCustomerByIdAdapter implements FindCustomerByIdOutPutPort {
+public class FindCustomerByIdAdapter implements FindCustomerByIdOutputPort {
 
     @Autowired
     private CustomerRepository customerRepository;

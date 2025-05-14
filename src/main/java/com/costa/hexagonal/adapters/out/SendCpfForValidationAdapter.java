@@ -1,12 +1,12 @@
 package com.costa.hexagonal.adapters.out;
 
-import com.costa.hexagonal.application.ports.out.SendCpfForValidationOutPut;
+import com.costa.hexagonal.application.ports.out.SendCpfForValidationOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SendCpfForValidationAdapter implements SendCpfForValidationOutPut {
+public class SendCpfForValidationAdapter implements SendCpfForValidationOutputPort {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

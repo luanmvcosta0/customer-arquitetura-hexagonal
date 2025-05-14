@@ -2,19 +2,19 @@ package com.costa.hexagonal.application.core.usecase;
 
 import com.costa.hexagonal.application.core.domain.Customer;
 import com.costa.hexagonal.application.ports.in.FindCustomerByIdInputPort;
-import com.costa.hexagonal.application.ports.out.FindCustomerByIdOutPutPort;
+import com.costa.hexagonal.application.ports.out.FindCustomerByIdOutputPort;
 
 public class FindCustomerByIdUseCase implements FindCustomerByIdInputPort {
 
-    private final FindCustomerByIdOutPutPort findCustomerByIdOutPutPort;
+    private final FindCustomerByIdOutputPort findCustomerByIdOutputPort;
 
-    public FindCustomerByIdUseCase(FindCustomerByIdOutPutPort findCustomerByIdOutPutPort) {
-        this.findCustomerByIdOutPutPort = findCustomerByIdOutPutPort;
+    public FindCustomerByIdUseCase(FindCustomerByIdOutputPort findCustomerByIdOutputPort) {
+        this.findCustomerByIdOutputPort = findCustomerByIdOutputPort;
     }
 
     @Override
     public Customer find(String id) {
-        return findCustomerByIdOutPutPort.find(id)
+        return findCustomerByIdOutputPort.find(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 

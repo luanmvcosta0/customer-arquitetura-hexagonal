@@ -2,32 +2,34 @@ package com.costa.hexagonal.application.core.usecase;
 
 import com.costa.hexagonal.application.core.domain.Customer;
 import com.costa.hexagonal.application.ports.in.FindCustomerByIdInputPort;
-import com.costa.hexagonal.application.ports.in.UpdateCustomerInPutPort;
-import com.costa.hexagonal.application.ports.out.FindAddressByZipCodeOutPutPort;
-import com.costa.hexagonal.application.ports.out.UpdateCustomerOutPutPort;
+import com.costa.hexagonal.application.ports.in.UpdateCustomerInputPort;
+import com.costa.hexagonal.application.ports.out.FindAddressByZipCodeOutputPort;
+import com.costa.hexagonal.application.ports.out.UpdateCustomerOutputPort;
 
-public class UpdateCustomerUseCase implements UpdateCustomerInPutPort {
+public class UpdateCustomerUseCase implements UpdateCustomerInputPort {
 
     private final FindCustomerByIdInputPort findCustomerByIdInputPort;
-    private final FindAddressByZipCodeOutPutPort findAddressByZipCodeOutPutPort;
-    private final UpdateCustomerOutPutPort updateCustomerOutPutPort;
+
+    private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
+
+    private final UpdateCustomerOutputPort updateCustomerOutputPort;
 
     public UpdateCustomerUseCase(
             FindCustomerByIdInputPort findCustomerByIdInputPort,
-            FindAddressByZipCodeOutPutPort findAddressByZipCodeOutPutPort,
-            UpdateCustomerOutPutPort updateCustomerOutPutPort)
-    {
+            FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort,
+            UpdateCustomerOutputPort updateCustomerOutputPort
+    ) {
         this.findCustomerByIdInputPort = findCustomerByIdInputPort;
-        this.findAddressByZipCodeOutPutPort = findAddressByZipCodeOutPutPort;
-        this.updateCustomerOutPutPort = updateCustomerOutPutPort;
+        this.findAddressByZipCodeOutputPort = findAddressByZipCodeOutputPort;
+        this.updateCustomerOutputPort = updateCustomerOutputPort;
     }
 
     @Override
     public void update(Customer customer, String zipCode) {
         findCustomerByIdInputPort.find(customer.getId());
-        var address = findAddressByZipCodeOutPutPort.find(zipCode);
+        var address = findAddressByZipCodeOutputPort.find(zipCode);
         customer.setAddress(address);
-        updateCustomerOutPutPort.update(customer);
+        updateCustomerOutputPort.update(customer);
     }
 
 }
